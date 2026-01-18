@@ -1,9 +1,14 @@
-import {useNavigate} from "react-router-dom";
+import {useNavigate,useState} from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import Loading from "../../Loading/Loading";
 export default function Signin() {
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     async function handleSubmit(e) {
+        
         e.preventDefault();
+        try{
+        setLoading(true);
         const res = await fetch("https://payloadhackathon.onrender.com/user/signin", {
             method: "POST",
             headers: {
@@ -24,6 +29,14 @@ export default function Signin() {
         if (res.status === 401) {
             alert("Invalid email or password");
         }
+        }catch(err){
+            console.log(err);
+        }finally{
+            setLoading(false);
+        }
+    }
+    if(loading){
+        return <Loading />;
     }
     return (
         <div className="flex h-screen w-screen flex-col justify-center px-6 py-12 lg:px-8 bg-black">
