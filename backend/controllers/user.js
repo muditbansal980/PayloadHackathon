@@ -33,8 +33,8 @@ async function handlesignin(req, res) {
         const token = generateToken(user);
         res.cookie("payloaduid", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'lax'
+            secure: true,
+            sameSite: 'none',
         });
         res.status(200).json({ message: 'Signin successful'});
     }catch (error) {

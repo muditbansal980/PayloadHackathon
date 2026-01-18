@@ -18,7 +18,7 @@ connectiondb(process.env.MONGO_DB_URL)
 
 app.use(
   cors({
-    origin: 'http://localhost:5173', // replace with your frontend origin (scheme+host+port)
+    origin: ['http://localhost:5173', 'https://payload-hackathon.vercel.app'], // replace with your frontend origin (scheme+host+port)
     credentials: true,               // allow Access-Control-Allow-Credentials
   })
 );
