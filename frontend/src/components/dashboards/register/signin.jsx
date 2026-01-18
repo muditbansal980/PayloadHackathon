@@ -4,7 +4,7 @@ export default function Signin() {
     const navigate = useNavigate();
     async function handleSubmit(e) {
         e.preventDefault();
-        const res = await fetch("http://localhost:3069/user/signin", {
+        const res = await fetch("https://payloadhackathon.onrender.com/user/signin", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

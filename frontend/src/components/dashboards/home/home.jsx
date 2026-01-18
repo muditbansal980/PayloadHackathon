@@ -1,5 +1,5 @@
 import Navbar from "../../Navbar/Navbar"
-import { CreditCard, Gift, TrendingUp, History, Target, Menu, X, Award, Zap, Calendar, DollarSign, PieChart } from 'lucide-react';
+import {  Gift, TrendingUp, Award, Zap, Calendar, DollarSign} from 'lucide-react';
 export default function Home() {
     const creditScore = 742;
     const rewardPoints = 1250;

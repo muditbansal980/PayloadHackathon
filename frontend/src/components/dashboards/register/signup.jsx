@@ -4,7 +4,7 @@ export default function Signup() {
     const navigate = useNavigate();
     async function handleSignup(e){
         e.preventDefault();
-        const res = await fetch("http://localhost:3069/user/signup",{
+        const res = await fetch("https://payloadhackathon.onrender.com/user/signup",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
