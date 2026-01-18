@@ -1,6 +1,7 @@
-import {useNavigate,useState} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import Loading from "../../Loading/Loading";
+import Loading from "../../Loading/loading";
 export default function Signin() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
