@@ -1,32 +1,44 @@
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Loading from "../../Loading/loading";
 export default function Signup() {
     const navigate = useNavigate();
-    async function handleSignup(e){
+    const [loading, setLoading] = useState(false);
+    async function handleSignup(e) {
+
         e.preventDefault();
-        const res = await fetch("https://payloadhackathon.onrender.com/user/signup",{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            credentials: 'include',
-            body:JSON.stringify({
-                username:e.target.username.value,
-                email:e.target.email.value,
-                password:e.target.password.value
-            })
-        });
-        if(res.status===201){
-            navigate("/");
+        try {
+            setLoading(true);
+            const res = await fetch("https://payloadhackathon.onrender.com/user/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    username: e.target.username.value,
+                    email: e.target.email.value,
+                    password: e.target.password.value
+                })
+            });
+            if (res.status === 201) {
+                navigate("/");
+            }
+            else if (res.status === 400) {
+                alert("All fields are required");
+            }
+            else if (res.status === 409) {
+                alert("Username or Email already exists");
+            }
+            const data = await res.json();
+            console.log(data);
         }
-        else if(res.status===400){
-            alert("All fields are required");
+        catch (err) {
+            console.log(err);
+        } finally {
+            setLoading(false);
         }
-        else if(res.status===409){
-            alert("Username or Email already exists");
-        }
-        const data = await res.json();
-        console.log(data);
     }
     return (
         <div className="flex h-screen w-screen flex-col justify-center px-6 py-12 lg:px-8 bg-black">
