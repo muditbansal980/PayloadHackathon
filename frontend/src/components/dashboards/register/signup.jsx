@@ -6,7 +6,6 @@ export default function Signup() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     async function handleSignup(e) {
-
         e.preventDefault();
         try {
             setLoading(true);
@@ -39,6 +38,9 @@ export default function Signup() {
         } finally {
             setLoading(false);
         }
+    }
+    if (loading) {
+        return <Loading />;
     }
     return (
         <div className="flex h-screen w-screen flex-col justify-center px-6 py-12 lg:px-8 bg-black">
