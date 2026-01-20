@@ -11,7 +11,8 @@ async function authmiddleware(req,res,next){
         return res.status(401).json({message:"Unauthorized"});
     }
     req.user = user;
+    console.log("Authenticated User:", user);
     next();
 }
 
-module.exports = authmiddleware;
+module.exports = {authmiddleware};
