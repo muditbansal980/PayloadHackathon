@@ -5,11 +5,12 @@ import Loading from "../../Loading/loading";
 export default function Signup() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     async function handleSignup(e) {
         e.preventDefault();
         try {
             setLoading(true);
-            const res = await fetch("https://payloadhackathon.onrender.com/user/signup", {
+            const res = await fetch(`${backendUrl}/user/signup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

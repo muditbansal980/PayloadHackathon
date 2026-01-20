@@ -1,42 +1,44 @@
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Loading from "../../Loading/loading";
 export default function Signin() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    console.log("Backend URL:", backendUrl);
     async function handleSubmit(e) {
-        
+
         e.preventDefault();
-        try{
-        setLoading(true);
-        const res = await fetch("https://payloadhackathon.onrender.com/user/signin", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                email: e.target.email.value,
-                password: e.target.password.value
-            })
-        });
-        if (res.status === 200) {
-            navigate("/home");
-        }
-        if (res.status === 400) {
-            alert("All fields are required");
-        }
-        if (res.status === 401) {
-            alert("Invalid email or password");
-        }
-        }catch(err){
+        try {
+            setLoading(true);
+            const res = await fetch(`${backendUrl}/user/signin`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    email: e.target.email.value,
+                    password: e.target.password.value
+                })
+            });
+            if (res.status === 200) {
+                navigate("/home");
+            }
+            if (res.status === 400) {
+                alert("All fields are required");
+            }
+            if (res.status === 401) {
+                alert("Invalid email or password");
+            }
+        } catch (err) {
             console.log(err);
-        }finally{
+        } finally {
             setLoading(false);
         }
     }
-    if(loading){
+    if (loading) {
         return <Loading />;
     }
     return (
