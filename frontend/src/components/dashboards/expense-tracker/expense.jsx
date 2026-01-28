@@ -2,6 +2,7 @@ import Navbar from '../../Navbar/Navbar';
 import { PieChart } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import AddExpense from './addexpense';
+import {EllipsisVertical} from 'lucide-react';
 export default function Expense() {
     const [expenses, setExpenses] = useState([]);
     const [showAddExpense, setShowAddExpense] = useState(false);
@@ -20,11 +21,27 @@ export default function Expense() {
                 setExpenses(data.expenses);
             }
             else {
-                alert("Failed to fetch expenses");
+                // Prevent infinite alert loop on fetch failure
+                console.error("Failed to fetch expenses");
             }
         }
         fetchExpenses();
     });
+    async function handleDelete(id){
+        const res = await fetch(`${backendUrl}/expense/delete/${id}`,{
+            method:"DELETE",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            credentials:'include',
+        });
+        if(res.status===200){
+            setExpenses(expenses => expenses.filter(exp => exp._id !== id));
+            alert("Expense deleted successfully");
+        }else{
+            alert("Failed to delete expense");
+        }
+    }
     return (
         <div className="h-screen w-screen overflow-y-auto bg-gray-100">
             <Navbar />
@@ -42,6 +59,9 @@ export default function Expense() {
                                     <span className="text-sm text-gray-600">
                                         ₹{exp.spentAmount} / ₹{exp.plannedAmount}
                                     </span>
+                                    <div className="group-hover:flex flex-col items-end space-y-2">
+                                        <button className="text-xs text-red-500 hover:underline" onClick={() => handleDelete(exp._id)}>Delete</button>
+                                    </div>
                                 </div>
                                 <div className="relative bg-gray-200 rounded-full h-3">
                                     <div
