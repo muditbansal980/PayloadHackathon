@@ -11,10 +11,10 @@ function NavbarComp() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link as={NavLink} to="/home">Home</Nav.Link>
-                            <Nav.Link as={NavLink} to="/rewards">Rewards</Nav.Link>
-                            <Nav.Link as={NavLink} to="/transactions">Transaction History</Nav.Link>
-                            <Nav.Link as={NavLink} to="/expenses">Expense Tracker</Nav.Link>
+                            <Nav.Link as={NavLink} to="/home" className="hover:scale-105 hover:font-blue-300">Home</Nav.Link>
+                            <Nav.Link as={NavLink} to="/rewards" className="hover:scale-105 hover:font-blue-300">Rewards</Nav.Link>
+                            <Nav.Link as={NavLink} to="/transactions" className="hover:scale-105 hover:font-blue-300">Transaction History</Nav.Link>
+                            <Nav.Link as={NavLink} to="/expenses" className="hover:scale-105 hover:font-blue-300">Expense Tracker</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
             </Container>
