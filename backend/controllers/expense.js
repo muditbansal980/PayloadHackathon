@@ -28,4 +28,15 @@ async function handlegetExpenses(req,res){
         res.status(500).json({message:'Internal server error'});
     }
 }
-module.exports = {handleAddExpense, handlegetExpenses};
+
+async function handleDeleteExpense(req,res){
+    const {id} = req.params;
+    console.log("Delete Expense ID:", id);
+    try{
+        await Expense.findByIdAndDelete(id);
+        res.status(200).json({message:"Expense deleted successfully"});
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
+module.exports = {handleAddExpense, handlegetExpenses,handleDeleteExpense};
