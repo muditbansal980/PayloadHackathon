@@ -1,13 +1,13 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Logo from '../../assets/logo.png';
 import { NavLink } from 'react-router-dom';
 function NavbarComp() {
     return (
         <Navbar expand="lg" className="bg-blue-500 ">
             <Container className='flex justify-between'>
-                    <Navbar.Brand >Logo</Navbar.Brand>
+                    <Navbar.Brand ><img src={Logo} alt="Logo" className="h-16 " /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
